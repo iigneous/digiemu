@@ -313,6 +313,7 @@ snapshots, card images and any file over 1 MB, on every pull request.
 | [docs/FIRMWARE-CHECK.md](docs/FIRMWARE-CHECK.md) | Checking a custom build before it goes on a device: what `emu.fwcheck` checks and what it cannot |
 | [DIGITAKT-MK1.md](DIGITAKT-MK1.md) | How the mk1 emulation works: boot, panel, audio, sequencer, and the tools |
 | [DIGITONE-MK1.md](DIGITONE-MK1.md) | The Digitone: its second CPU, card, panel and measurements |
+| [SYNTAKT.md](SYNTAKT.md) | The Syntakt (work in progress): boots to its UI, second CPU running; the FPGA is not modelled, so it is silent |
 | [MODELS.md](MODELS.md) | The Model:Cycles and Model:Samples: their scanned panel, codec, audio and +Drive |
 | [docs/mk1/](docs/mk1/00-INDEX.md) | The firmware reference: 01–09 are generated, 10 onwards written by hand |
 | [patches/README.md](patches/README.md) | The six Unicorn patches |
