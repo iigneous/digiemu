@@ -107,6 +107,28 @@ LEVEL/DATA; `encoder_counts = 4`, as on the mk1s (the same dead zone).
 The window (`emu/synpanel.py`) places those keys on the Digitakt window's
 plan; it is not the Syntakt's faceplate.
 
+## Known limits
+
+- **Silent.** The original digital machines, the analog tracks and the
+  voice chain after the second CPU run in the FPGA, which is not modelled;
+  the SSI output carries nothing.
+- **Panel window.** It uses the Digitakt window's plan, not the Syntakt's
+  faceplate, and codes 45..48 are not named by the firmware's table.
+- **Not checked:** LEDs, MIDI, USB audio, the analog tracks' controls.
+- **Run mode.** Sequencer ticks need live audio at the device's `[audio] ips`
+  (see Audio pace).
+
+## Files
+
+| | |
+|---|---|
+| `emu/synboard.py` | the Syntakt's board: DMA timer 2, eDMA 29, DSPI1, board id |
+| `emu/dsplink.py` | the second CPU, its wiring, the section 6 stand-in |
+| `emu/synpanel.py` | the Syntakt window (on the Digitakt window's plan) |
+| `emu/ssi.py` | the `syntakt` SSI profile |
+| `emu/symbols.py` | the `syn_*` signature rules |
+| `devices/syntakt.toml` | identity, wire map, panel names, audio |
+
 ## Open
 
 - Mix the second CPU's voices into the SSI output, so the app is not silent.
