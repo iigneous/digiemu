@@ -1,12 +1,17 @@
 # Syntakt emulator (work in progress)
 
-digiemu boots Elektron Syntakt OS 1.40A on the same emulated ColdFire
-MCF5441x as the Digitakt mk1 and the Digitone mk1, runs its second ColdFire
-(section 7) the way it runs the Digitone's, and reaches the live user
-interface with the panel, the sequencer and parameter locks working.
+digiemu boots Elektron Syntakt OS 1.40A and OS 1.42 on the same emulated
+ColdFire MCF5441x as the Digitakt mk1 and the Digitone mk1, runs its second
+ColdFire (section 7) the way it runs the Digitone's, and reaches the live
+user interface with the panel, the sequencer and parameter locks working.
 
 Tested with `Syntakt_OS1.40A.syx`, SHA-256
-`266a5a3022ff565bf470173147b7f3005b7da8ef80724b6271836818ac2b5828`.
+`266a5a3022ff565bf470173147b7f3005b7da8ef80724b6271836818ac2b5828`, and
+`Syntakt_OS1.42.syx`, SHA-256
+`ded3c59fdb909eb9e2c3307b30a486452c8fa6947b12c14e0ce35a187b7f37c1`.
+On 1.42 the cold boot reaches the live UI (intro live at 80M instructions)
+and the second CPU's status word reads 6. The panel wire map below is still
+the 1.40A measurement.
 
 ## What works, and what does not
 
@@ -115,6 +120,8 @@ plan; it is not the Syntakt's faceplate.
 - **Panel window.** It uses the Digitakt window's plan, not the Syntakt's
   faceplate, and codes 45..48 are not named by the firmware's table.
 - **Not checked:** LEDs, MIDI, USB audio, the analog tracks' controls.
+  USB endpoint prime and flush (`emu/usbotg.py`) complete immediately, so
+  confirming warm-up calibration does not spin with interrupts masked.
 - **Run mode.** Sequencer ticks need live audio at the device's `[audio] ips`
   (see Audio pace).
 

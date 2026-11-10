@@ -15,7 +15,9 @@ Digitone mk1 OS 1.43, SHA-256
 Model:Samples OS 1.13, SHA-256
 `e11859b68deb7e5e3fe86ab32581212093849c4be5d3950add011eac398a2ce8`
 ([MODELS.md](../MODELS.md)), and, as work in progress, Syntakt OS 1.40A,
-SHA-256 `266a5a3022ff565bf470173147b7f3005b7da8ef80724b6271836818ac2b5828`
+SHA-256 `266a5a3022ff565bf470173147b7f3005b7da8ef80724b6271836818ac2b5828`,
+and OS 1.42, SHA-256
+`ded3c59fdb909eb9e2c3307b30a486452c8fa6947b12c14e0ce35a187b7f37c1`
 ([SYNTAKT.md](../SYNTAKT.md)).
 
 ## What works
@@ -51,11 +53,11 @@ SHA-256 `266a5a3022ff565bf470173147b7f3005b7da8ef80724b6271836818ac2b5828`
   key LEDs, and live audio at 100% of real time. Their board is
   `emu/modelboard.py`: the panel the main CPU scans itself, the I2C codec
   and the PIT1 delay. The Model:Samples loads samples like the Digitakt.
-- **The Syntakt (work in progress).** Boots OS 1.40A from a cold start
-  through the intro to the live UI (first run about 45 s), with the panel,
-  the sequencer and parameter locks working. The second CPU boots through
-  the section 6 / section 7 handshake as on the Digitone and renders the
-  digital machines' blocks (`emu/dsplink.py`, board in `emu/synboard.py`,
+- **The Syntakt (work in progress).** Boots OS 1.40A and OS 1.42 from a
+  cold start through the intro to the live UI (1.42's first run about 17 s),
+  with the panel, the sequencer and parameter locks working. The second CPU
+  boots through the section 6 / section 7 handshake as on the Digitone and
+  renders the digital machines' blocks (`emu/dsplink.py`, board in `emu/synboard.py`,
   window in `emu/synpanel.py`). The FPGA is not modelled, so the outputs are
   silent.
 - **Checking a build before it is flashed** (`emu.fwcheck`,

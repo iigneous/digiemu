@@ -1361,8 +1361,13 @@ SYMBOLS = [
     # and reads 6 once the second CPU runs (1..5 are its failures: the
     # sections missing, 'NO', the shared-RAM test). Kept apart from
     # dsp_boot_task so the Digitone's rules are untouched.
-    ('syn_dsp_boot_task', Sig(H(48, '20-23,28-35,42-45', '0:70ef7210', '090a313735a5dd8f3fa3d75db9a0f261'),
-                              hi=DATA_HI), False),
+    # OS 1.42 (0x40082c04) recompiles the same 48 bytes: the wildcards stay,
+    # the fixed bytes do not. The request-semaphore operand is still at
+    # +0x3c and the status word is still cleared at +0x54.
+    ('syn_dsp_boot_task', AnyOf(Sig(H(48, '20-23,28-35,42-45', '0:70ef7210', '090a313735a5dd8f3fa3d75db9a0f261'),
+                                    hi=DATA_HI),
+                                Sig(H(48, '20-23,28-35,42-45', '0:70ef7210', '553a861ab777bd52093f73e34f4d44de'),
+                                    hi=DATA_HI)), False),
     ('syn_dsp_request_sem', Operand('syn_dsp_boot_task', at=0x3c), False),
     ('syn_dsp_status', Operand('syn_dsp_boot_task', at=0x54), False),
     # The link's set-up (0x40081ec8 on 1.40A) initialises the boot task's
@@ -1382,8 +1387,12 @@ SYMBOLS = [
     # callbacks, which semscan does not see; faked, the task spins at
     # priority 7 and starves every task below it -- the second CPU's
     # handshake among them.
-    ('syn_midi_task', Sig(H(32, '10-13,16-19,22-29', '6:7cfc4879', '42ba51e6339774a9742f027dc1da853b'),
-                          hi=DATA_HI), False),
+    # OS 1.42 (0x40103e0a) recompiles the same 32 bytes. The shared event
+    # semaphore's pea is still at +0x08, so the operand at +0x0a is unchanged.
+    ('syn_midi_task', AnyOf(Sig(H(32, '10-13,16-19,22-29', '6:7cfc4879', '42ba51e6339774a9742f027dc1da853b'),
+                                hi=DATA_HI),
+                            Sig(H(32, '10-13,16-19,22-29', '6:7cfc4879', '4dfb666fa00075c5f881e389359ded6a'),
+                                hi=DATA_HI)), False),
     ('syn_midi_sem', Operand('syn_midi_task', at=0x0a), False),
 
     # Every `bra.b $self` (opcode 60FE) -- the RTOS idiom for "nothing to do,

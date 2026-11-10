@@ -18,6 +18,15 @@ version = "1.40A"
 sha256 = "266a5a3022ff565bf470173147b7f3005b7da8ef80724b6271836818ac2b5828"
 filename = "Syntakt_OS1.40A.syx"
 
+# 1.42 (2026-09-30): the second-CPU boot task and the MIDI input task were
+# recompiled. emu/symbols.py matches both forms. Cold boot reaches the live
+# UI and the second CPU's status word reads 6. The panel map below is still
+# the 1.40A measurement.
+[[firmware]]
+version = "1.42"
+sha256 = "ded3c59fdb909eb9e2c3307b30a486452c8fa6947b12c14e0ce35a187b7f37c1"
+filename = "Syntakt_OS1.42.syx"
+
 [card]
 # Not measured yet: whether the Syntakt formats an ekFS volume. It has no
 # sample engine, so start from the Digitone's answer.

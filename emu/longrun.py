@@ -648,6 +648,13 @@ def build(snapshot, send=b'', syx=None, isa='scoped',
             skip.update(synb.never_fake)
             ev['never_fake'] = ev['never_fake'] | set(synb.never_fake)
 
+    # USB OTG endpoint prime/flush (emu/usbotg.py). Stateless: a read is the
+    # controller reporting the command already finished. Every product's
+    # controller sits at the same address, and a snapshot carries no extra
+    # state for it.
+    from emu import usbotg as _usbotg
+    _usbotg.install(m)
+
     def onr(uc, typ, addr, size, val, data):
         if addr == USR8: uc.mem_write(USR8, bytes([0x04 | (0x01 if inq else 0)]))
         elif addr == UDR8: uc.mem_write(UDR8, bytes([inq.popleft() if inq else 0]))
